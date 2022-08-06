@@ -18,4 +18,7 @@ const onPlay = function ({ seconds }) {
 };
 
 player.on('timeupdate', throttle(onPlay, 1000));
-player.setCurrentTime(savedCurrentTime);
+
+savedCurrentTime = savedCurrentTime
+  ? player.setCurrentTime(savedCurrentTime)
+  : 0;
