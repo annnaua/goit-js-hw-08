@@ -7,9 +7,10 @@ const form = document.querySelector('.feedback-form');
 form.addEventListener('input', throttle(onFormData, 500));
 form.addEventListener('submit', onSubmitForm);
 
-const formData = {};
-
 function onFormData(e) {
+  let formData = localStorage.getItem(FEEDBACK_FORM);
+
+  formData = formData ? JSON.parse(formData) : {};
   formData[e.target.name] = e.target.value;
 
   localStorage.setItem(FEEDBACK_FORM, JSON.stringify(formData));
@@ -29,8 +30,6 @@ function setInputsLocalStorage() {
     for (const key in savedFormData) {
       form.elements[key].value = savedFormData[key];
     }
-  } else {
-    savedFormData = {};
   }
 }
 
